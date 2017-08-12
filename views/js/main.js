@@ -512,14 +512,15 @@ function updatePositions() {
   for(var i=0; i<5; i++){
     remainderArray.push(Math.sin((sctop / 1250) + i));
   }
-  //moved the 100 multiplier onto the phase var, so all calculations are done in one setting.-ERC
+
   for (var i = 0; i < items.length; i++) {
-    var phase = (remainderArray[i%5]*100);
-    items[i].style.left = items[i].basicLeft + phase + 'px';
+    //added transform pulling from the remainderArray
+    items[i].style.transform = "translateX("+remainderArray[i%5]*100+ "px)";
   }
 
   // User Timing API to the rescue again. Seriously, it's worth learning.
   // Super easy to create custom metrics.
+
   window.performance.mark("mark_end_frame");
   window.performance.measure("measure_frame_duration", "mark_start_frame", "mark_end_frame");
   if (frame % 10 === 0) {
@@ -544,6 +545,9 @@ document.addEventListener('DOMContentLoaded', function() {
     elem.style.height = "100px";
     elem.style.width = "73.333px";
     elem.basicLeft = (i % cols) * s;
+    //added left to style for transform and willChange
+    elem.style.left = elem.basicLeft + 'px';
+    elem.style.willChange= 'transform';
     elem.style.top = (Math.floor(i / cols) * s) + 'px';
     document.querySelector("#movingPizzas1").appendChild(elem);
   }
