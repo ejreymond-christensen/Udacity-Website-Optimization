@@ -497,14 +497,25 @@ function logAverageFrame(times) {   // times is the array of User Timing measure
 // https://www.igvita.com/slides/2012/devtools-tips-and-tricks/jank-demo.html
 
 // Moves the sliding background pizzas based on scroll position
+
+//moved the items var outside the loop, only needs to be run once.-ERC
+var items = document.getElementsByClassName('mover');
+
 function updatePositions() {
   frame++;
   window.performance.mark("mark_start_frame");
-
-  var items = document.querySelectorAll('.mover');
+  /*created a sctop and remainderArray var.
+  sctop only needs to be pullled at the function level, not each time in the for loop.
+  remainderArray, i%5 only produces five possible numbers, so we can create a loop that runs the minimum possible times and stick it in an array. -ERC*/
+  var sctop = document.body.scrollTop
+  var remainderArray =[];
+  for(var i=0; i<5; i++){
+    remainderArray.push(Math.sin((sctop / 1250) + i));
+  }
+  //moved the 100 multiplier onto the phase var, so all calculations are done in one setting.-ERC
   for (var i = 0; i < items.length; i++) {
-    var phase = Math.sin((document.body.scrollTop / 1250) + (i % 5));
-    items[i].style.left = items[i].basicLeft + 100 * phase + 'px';
+    var phase = (remainderArray[i%5]*100);
+    items[i].style.left = items[i].basicLeft + phase + 'px';
   }
 
   // User Timing API to the rescue again. Seriously, it's worth learning.
@@ -524,10 +535,12 @@ window.addEventListener('scroll', updatePositions);
 document.addEventListener('DOMContentLoaded', function() {
   var cols = 8;
   var s = 256;
-  for (var i = 0; i < 200; i++) {
+  //changed i to 56, which is the needed amount of pizzas to fill a 2200x1048 screen. -ERC
+  for (var i = 0; i < 56; i++) {
     var elem = document.createElement('img');
     elem.className = 'mover';
-    elem.src = "images/pizza.png";
+    //changed source image to same size called out. 100x73.-ERC
+    elem.src = "images/pizzabackground.png";
     elem.style.height = "100px";
     elem.style.width = "73.333px";
     elem.basicLeft = (i % cols) * s;
