@@ -402,7 +402,7 @@ var pizzaElementGenerator = function(i) {
 var resizePizzas = function(size) {
   window.performance.mark("mark_start_resize");   // User Timing API function
 
-  // Removed determineDX function and moved switch function and changePizzaSizes under changeSlider function. THis combined 2 switch loops to one.
+  // Removed determineDX function and moved switch function and changePizzaSizes under changeSlider function. This combined 2 switch loops to one.
   // Changes the value for the size of the pizza above the slider
   function changeSliderLabelAndPizzaSizes(size) {
     switch(size) {
