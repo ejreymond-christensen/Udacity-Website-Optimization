@@ -519,9 +519,8 @@ document.addEventListener('DOMContentLoaded', function() {
     elem.src = "images/pizzabackground.png";
     elem.style.height = "100px";
     elem.style.width = "73.333px";
-    elem.basicLeft = (i % cols) * s;
     //added left to style for transform and willChange
-    elem.style.left = elem.basicLeft + 'px';
+    elem.style.left = ((i % cols) * s )+ 'px';
     elem.style.willChange= 'transform';
     elem.style.top = (Math.floor(i / cols) * s) + 'px';
     document.querySelector("#movingPizzas1").appendChild(elem);
