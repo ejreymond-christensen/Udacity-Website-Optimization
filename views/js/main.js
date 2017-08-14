@@ -408,7 +408,7 @@ var resizePizzas = function(size) {
     switch(size) {
       case "1":
         document.querySelector("#pizzaSize").innerHTML = "Small";
-        newwidth= 25;
+        var newwidth= 25;
         break;
       case "2":
         document.querySelector("#pizzaSize").innerHTML = "Medium";
@@ -423,7 +423,7 @@ var resizePizzas = function(size) {
         console.log("bug in sizeSwitcher");
         break;
     }
-    var getPizza = document.querySelectorAll(".randomPizzaContainer")
+    var getPizza = document.querySelectorAll(".randomPizzaContainer");
 
     for (var i = 0; i < getPizza.length; i++) {
       getPizza[i].style.width = newwidth + "%";
@@ -482,10 +482,10 @@ function updatePositions() {
   /*created a sctop and remainderArray var.
   sctop only needs to be pullled at the function level, not each time in the for loop.
   remainderArray, i%5 only produces five possible numbers, so we can create a loop that runs the minimum possible times and stick it in an array. -ERC*/
-  var sctop = document.body.scrollTop
+  var sctop = document.body.scrollTop;
   var remainderArray =[];
-  for(var i=0; i<5; i++){
-    remainderArray.push(Math.sin((sctop / 1250) + i));
+  for(var x=0; x<5; x++){
+    remainderArray.push(Math.sin((sctop / 1250) + x));
   }
 
   for (var i = 0; i < items.length; i++) {
